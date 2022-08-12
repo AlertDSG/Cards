@@ -19,7 +19,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
 export const logoutAC = () =>  ({type: "LOG_OUT_VALUE"}) as const
 
 export const logoutThunkAC = (): AppThunk => async dispatch => {
-    debugger
+
     try {
         dispatch(setAppStatusAC('loading'))
         await authAPI.logout()
@@ -28,6 +28,7 @@ export const logoutThunkAC = (): AppThunk => async dispatch => {
     } catch(e: any) {
         dispatch(setLoginErrorStatusAC(e.response.data.error))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsLoggedInAC(false))
     }
 }
 

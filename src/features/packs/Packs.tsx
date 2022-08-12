@@ -5,7 +5,7 @@ import {setPacks} from "./packs-reducer";
 import {Navigate} from "react-router-dom";
 import {PacksTable} from "../../common/components/packsPageComponents/PacksTable";
 import {PacksHeader} from "../../common/components/packsPageComponents/PacksHeader";
-import {QuestionsForLearnPage} from "../../common/components/learnPageComponents/QuestionsForLearnPage";
+import style from "./Packs.module.css"
 
 export const Packs = () => {
     // const [searchParams, setSearchParams] = useSearchParams()
@@ -31,13 +31,7 @@ export const Packs = () => {
 
     return (
 
-        <div style={{
-            maxWidth: '1250px',
-            padding: '50px 20px',
-            display: 'flex',
-            flexDirection: 'column',
-            margin: '0 auto'
-        }}>
+        <div className={style.body}>
 
             <PacksHeader/>
             <PacksTable/>

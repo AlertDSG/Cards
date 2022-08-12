@@ -25,7 +25,7 @@ export const ProfileCard = () => {
     }, [dispatch])
 
     return (
-        <>
+        <div style={{textAlign: 'center'}}>
             <div className={style.personal}>
                 <h1>Personal information</h1>
             </div>
@@ -41,6 +41,6 @@ export const ProfileCard = () => {
                 <h2 className={style.item}> Packs: {publicCardPacksCount}</h2>
             </li>
             <UniversalButton name={'LOG OUT'} callback={logoutHandler}/>
-        </>
+        </div>
     );
 };

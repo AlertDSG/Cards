@@ -43,7 +43,7 @@ export const NewPassword = () => {
     }
 
     return <Wrapper>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} style={{textAlign: 'center'}}>
             <FormControl>
                 <FormLabel>
                     <p>Create new password</p>

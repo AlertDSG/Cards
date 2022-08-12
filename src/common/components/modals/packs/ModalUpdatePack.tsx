@@ -8,14 +8,14 @@ import {WrapperModal} from "../WrapperModal";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 import {updateUserPack} from "../../../../features/packs/packs-reducer";
 import {CheckboxComponent} from "../../../UniversalComponents/CheckboxComponent";
+import style from "../Modals.module.css"
 
 type ModalType = {
     value: boolean
-    callback:()=>void
+    callback: () => void
 }
 
 export const ModalUpdatePack = ({value, callback}: ModalType) => {
-    const initial = !value ? false : value
 
     const [text, setText] = useState<string>('')
     const [isPrivate, setIsPrivate] = useState<boolean>(false)
@@ -28,23 +28,26 @@ export const ModalUpdatePack = ({value, callback}: ModalType) => {
 
     const updatePack = () => {
         dispatch(updateUserPack({_id: id, name: text, private: isPrivate}))
+        callback()
     }
 
     return (
-        <WrapperModal isOpen={initial}>
-            <div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <WrapperModal isOpen={value} callback={() => callback()}>
+            <div className={style.header}>
                 <h2>Edite pack</h2>
-                <IconButton onClick={()=>callback()}>
+                <IconButton onClick={() => callback()}>
                     <CloseIcon/>
                 </IconButton>
             </div>
-            <InputModal text={pack && pack.name} callback={(text)=>setText(text)} label={'Name pack'}/>
-            <CheckboxComponent callback={(value)=>setIsPrivate(value)}/>
-            <Stack direction="row" spacing={2}>
-                <Button onClick={()=>callback()} variant="outlined">
+            <InputModal text={pack && pack.name} callback={(text) => setText(text)} label={'Name pack'}/>
+            <div className={style.checked}>
+                <CheckboxComponent callback={(value) => setIsPrivate(value)}/>
+            </div>
+            <Stack className={style.doubleBtn} direction="row" spacing={2}>
+                <Button onClick={() => callback()} variant="outlined">
                     Cancel
                 </Button>
-                <Button  onClick={updatePack} variant="contained">
+                <Button onClick={updatePack} variant="contained">
                     Save
                 </Button>
             </Stack>

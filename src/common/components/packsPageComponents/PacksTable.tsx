@@ -43,8 +43,11 @@ export const PacksTable = () => {
     }
 
     const page = paramsPage ? paramsPage : defaultPage
-    const pageTotalCount = cardPacksTotalCount ? Math.ceil(cardPacksTotalCount / pageCount) : 0
     const pageSize = paramsPageCount ? paramsPageCount : pageCount
+    const pageTotalCount = cardPacksTotalCount ? Math.ceil(cardPacksTotalCount / pageSize) : 0
+
+
+    console.log(pageTotalCount, cardPacksTotalCount, pageCount)
 
     return (
         <>

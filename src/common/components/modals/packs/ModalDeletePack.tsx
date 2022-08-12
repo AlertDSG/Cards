@@ -1,22 +1,21 @@
 import React from 'react';
 import IconButton from "@mui/material/IconButton/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import {InputModal} from "../InputModal";
-import {CheckboxComponent} from "../../../UniversalComponents/CheckboxComponent";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import {WrapperModal} from "../WrapperModal";
 import {Delete} from "@mui/icons-material";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 import {removePack} from "../../../../features/packs/packs-reducer";
+import style from "../Modals.module.css"
 
 type ModalType = {
     value: boolean
-    callback:()=>void
+    callback: () => void
 }
 
 export const ModalDeletePack = ({value, callback}: ModalType) => {
-    const initial = !value ? false : value
+
 
     const dispatch = useAppDispatch()
     const id = useAppSelector((state) => state.packs.packId)
@@ -25,24 +24,27 @@ export const ModalDeletePack = ({value, callback}: ModalType) => {
     const pack = cardPacks.find(c => c._id === id)
 
     const removePackHandler = () => {
-      dispatch(removePack(id))
+        dispatch(removePack(id))
+        callback()
     }
 
     return (
-        <WrapperModal isOpen={initial}>
-            <div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <WrapperModal isOpen={value} callback={callback}>
+            <div className={style.header}>
                 <h2>Delete Pack</h2>
-                <IconButton onClick={()=>callback()}>
+                <IconButton onClick={() => callback()}>
                     <CloseIcon/>
                 </IconButton>
             </div>
-            <h3>Do you want to remove {pack && pack.name}</h3>
-            <h3>All cards will be deleted</h3>
-            <Stack direction="row" spacing={2}>
-                <Button onClick={()=>callback()} variant="outlined">
+            <div className={style.text}>
+                <h3 className={style.title}>Do you want to remove <span className={style.name}>{pack && pack.name}</span>?</h3>
+                <span>All cards will be deleted</span>
+            </div>
+            <Stack className={style.doubleBtn} direction="row" spacing={2}>
+                <Button onClick={() => callback()} variant="outlined">
                     Cancel
                 </Button>
-                <Button   onClick={removePackHandler} variant="contained" endIcon={<Delete/>}>
+                <Button onClick={removePackHandler} variant="contained" endIcon={<Delete/>}>
                     Delete
                 </Button>
             </Stack>

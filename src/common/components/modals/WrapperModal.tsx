@@ -6,7 +6,7 @@ type WrapperModal = {
     children: React.ReactNode
     nameBtn?: string
     isOpen: boolean
-    callback?: () => void
+    callback?: (value: boolean) => void
 }
 
 const style = {
@@ -21,18 +21,21 @@ const style = {
     p: 4,
 };
 
-export const WrapperModal = ({children, isOpen}: WrapperModal) => {
+export const WrapperModal = ({children, isOpen, callback}: WrapperModal) => {
 
     const [open, setOpen] = React.useState(isOpen);
 
-    const handleClose = () => setOpen(false)
+    const handleClose = () => {
+        setOpen(false)
+        callback && callback(false)
+    }
 
 
     return (
         <div>
             <Modal
                 keepMounted
-                open={open}
+                open={isOpen}
                 onClose={handleClose}
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"

@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import {UniversalButton} from "../../../UniversalComponents/UniversalButton";
 import {addNewCard} from "../../../../features/cards/cards-reducer";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
+import style from "../Modals.module.css"
+import Stack from "@mui/material/Stack";
 
 export const ModalCard = () => {
 
@@ -20,24 +22,29 @@ export const ModalCard = () => {
 
     const addCard = () => {
         dispatch(addNewCard({cardsPack_id, question, answer}))
+        setAddModal(false)
     }
     return (
         <><UniversalButton callback={() => setAddModal(true)} name={'Add new card'}/>
-            { addModal && <WrapperModal isOpen={addModal}>
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            {addModal && <WrapperModal isOpen={addModal} callback={(value) => setAddModal(value)}>
+                <div className={style.header}>
                     <h2>Add new card</h2>
-                    <IconButton onClick={() =>setAddModal(false)}>
+                    <IconButton onClick={() => setAddModal(false)}>
                         <CloseIcon/>
                     </IconButton>
                 </div>
-                <InputModal text={question} label={'Question'} callback={(value) => setQuestion(value)}/>
-                <InputModal text={answer} label={'Answer'} callback={(value) => setAnswer(value)}/>
-                <Button onClick={() =>setAddModal(false)} variant="outlined">
-                    Cancel
-                </Button>
-                <Button onClick={addCard} variant="contained">
-                    Save
-                </Button>
+                <div className={style.inputs}>
+                    <InputModal text={question} label={'Question'} callback={(value) => setQuestion(value)}/>
+                    <InputModal text={answer} label={'Answer'} callback={(value) => setAnswer(value)}/>
+                </div>
+                <Stack className={style.doubleBtn} direction="row" spacing={2}>
+                    <Button onClick={() => setAddModal(false)} variant="outlined">
+                        Cancel
+                    </Button>
+                    <Button onClick={addCard} variant="contained">
+                        Save
+                    </Button>
+                </Stack>
             </WrapperModal>
             }
         </>

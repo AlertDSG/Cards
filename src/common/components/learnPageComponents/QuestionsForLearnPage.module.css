@@ -1,19 +1,16 @@
 .container {
-    width: 370px !important;
-    height: 210px !important;
+    width: 370px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: left;
-
-
+    text-align: center;
 }
-
 
 .learn {
     padding-top: 20px;
-
     align-self: center;
+    text-align: center;
 }
 
 .question {

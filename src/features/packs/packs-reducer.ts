@@ -1,7 +1,7 @@
 import {AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
-import {NameCellType, SortType} from "../../common/TypeForSort";
 import {PackCreateType, PackParamsType, packsAPI, PackType, PackUpdateType, ResponsePacksType} from "./packsApi";
+import {setLoginErrorStatusAC} from "../auth/auth-reducer";
 
 const initialState = {
     cardPacks: [] as PackType[],
@@ -13,8 +13,6 @@ const initialState = {
     packId: '',
     token: null as null | number,
     tokenDeathTime: null as null | number,
-    statusSort: '' as NameCellType,
-    regulator: 'decr' as SortType,
     params: {
         packName: undefined,
         min: undefined,
@@ -44,12 +42,6 @@ export const packsReducer = (state: InitialStateType = initialState, action: App
                 ...state,
                 params: {...state.params, ...action.params}
             }
-        case 'packs/CHANGE_STATUS_SORT':
-            return {
-                ...state,
-                statusSort: action.statusSort,
-                regulator: action.regulator
-            }
         case 'packs/SET_PACK_ID':
             return {
                 ...state,
@@ -63,7 +55,6 @@ export const packsReducer = (state: InitialStateType = initialState, action: App
 export const initialCards = (data: ResponsePacksType) => ({type: 'packs/INITIAL_PACKS', data}) as const
 export const changeMinMaxCards = (data: number[]) => ({type: 'packs/CHANGE_MIN_MAX_PACKS', data}) as const
 export const changeParamsPacks = (params: PackParamsType) => ({type: 'packs/CHANGE_PARAMS', params}) as const
-export const changeStatusSortPacks = (statusSort: NameCellType, regulator: SortType) => ({type: 'packs/CHANGE_STATUS_SORT', statusSort, regulator}) as const
 export const setPackId = (id: string) => ({type: 'packs/SET_PACK_ID', id}) as const
 
 
@@ -76,7 +67,7 @@ export const setPacks = (): AppThunk => async (dispatch, getState) => {
         dispatch(initialCards(res.data))
         dispatch(setAppStatusAC('succeeded'))
     } catch (e){
-
+        dispatch(setAppStatusAC('succeeded'))
         console.log(e)
     }
 }
@@ -88,8 +79,8 @@ export const createPack = (data: PackCreateType): AppThunk => async (dispatch) =
         await packsAPI.createPack(data)
         dispatch(setPacks())
         dispatch(setAppStatusAC('succeeded'))
-    } catch (e){
-        console.log(e)
+    } catch (e: any){
+        dispatch(setLoginErrorStatusAC(e.response.data.error))
         dispatch(setAppStatusAC('succeeded'))
     }
 }
@@ -101,8 +92,8 @@ export const removePack = (id: string): AppThunk => async (dispatch) => {
         await packsAPI.deletePack(id)
         dispatch(setPacks())
         dispatch(setAppStatusAC('succeeded'))
-    } catch (e){
-        console.log(e)
+    } catch (e: any){
+        dispatch(setLoginErrorStatusAC(e.response.data.error))
         dispatch(setAppStatusAC('succeeded'))
     }
 }
@@ -114,8 +105,8 @@ export const updateUserPack = (data: PackUpdateType): AppThunk => async (dispatc
         await packsAPI.updatePack(data)
         dispatch(setPacks())
         dispatch(setAppStatusAC('succeeded'))
-    } catch (e){
-        console.log(e)
+    } catch (e: any){
+        dispatch(setLoginErrorStatusAC(e.response.data.error))
         dispatch(setAppStatusAC('succeeded'))
     }
 }
@@ -124,5 +115,4 @@ type AppActionsType =
     ReturnType<typeof initialCards>
     | ReturnType<typeof changeMinMaxCards>
     | ReturnType<typeof changeParamsPacks>
-    | ReturnType<typeof changeStatusSortPacks>
     | ReturnType<typeof setPackId>

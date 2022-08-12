@@ -1,6 +1,6 @@
 import {useFormik} from 'formik';
 import React from 'react';
-import {Button, FormControl, FormGroup, FormLabel, Grid, Paper, TextField} from "@mui/material";
+import {Button, FormControl, FormGroup, TextField} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import {createUser} from "../auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
@@ -57,7 +57,7 @@ export const Registration = () => {
     }
 
     return <Wrapper>
-        <FormControl>
+        <FormControl style={{textAlign: 'center'}}>
             <form onSubmit={formik.handleSubmit}>
                 <FormGroup style={{paddingBottom: '20px'}}>
                     <TextField

@@ -1,4 +1,5 @@
 import {instance} from "../auth/authAPI";
+import {sortPacks} from "../../common/TypeForSort";
 
 export const cardsAPI = {
     getCards: (params: CardsParamsType) => {
@@ -44,6 +45,9 @@ export type CardType = {
     created: string
     updated: string
     _id: string
+    type: string,
+    rating: number,
+    more_id: string,
 }
 
 export type ResponseCardsType = {
@@ -64,7 +68,7 @@ export type CardsParamsType = {
     cardsPack_id: string
     min?: number
     max?: number
-    sortCards?: string
+    sortCards?: sortPacks
     page?: number
     pageCount?: number
 }

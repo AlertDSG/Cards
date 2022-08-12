@@ -9,8 +9,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {removePack, setPackId} from "../../../features/packs/packs-reducer";
-import {changeParamsCards} from "../../../features/cards/cards-reducer";
+import {setPackId} from "../../../features/packs/packs-reducer";
+import {changeParamsCards, setNamePack} from "../../../features/cards/cards-reducer";
+import {setLearnCardsId} from "../../../features/learn/learn-reducer";
+import {formDate} from "../../utils/formDate-utils";
 
 type PropsType = {
     callbackUpdate?: () => void
@@ -32,29 +34,30 @@ export const PacksTableBody = ({callbackUpdate, callbackDelete}: PropsType) => {
         dispatch(setPackId(id))
         callbackUpdate && callbackUpdate()
     }
-    const cardsPageHandler = (id: string) => {
+    const cardsPageHandler = (id: string, name: string) => {
         dispatch(changeParamsCards({cardsPack_id: id}))
+        dispatch(setNamePack(name))
     }
 
     return (
         <>
-
             <TableBody>
                 {packs.map((pack) => (
                     <TableRow
                         key={pack._id}
                         sx={{'&:last-child td, &:last-child th': {border: 0}}}
                     >
-                        <TableCell component="th" scope="row">
-                            <Link onClick={() => cardsPageHandler(pack._id)} to={'/cards'}>{pack.name}</Link>
+                        <TableCell align={'center'}>
+                            <Link onClick={() => cardsPageHandler(pack._id, pack.name)} to={'/cards'}>{pack.name}</Link>
                         </TableCell>
-                        <TableCell align="right">{pack.cardsCount}</TableCell>
-                        <TableCell align="right">{pack.updated}</TableCell>
-                        <TableCell align="right">{pack.created}</TableCell>
-                        <TableCell align="right">
-                            <Link onClick={() => cardsPageHandler(pack._id)} to={'/cards'}>
-                                <IconButton aria-label="learn"><LocalLibraryIcon color='info'/></IconButton>
-                            </Link><span> </span>
+                        <TableCell align="center">{pack.cardsCount}</TableCell>
+                        <TableCell align="center">{formDate(pack.updated)}</TableCell>
+                        <TableCell align="center">{pack.user_name}</TableCell>
+                        <TableCell align="center">
+                            <Link to={'/learn'}>
+                                <IconButton onClick={() => dispatch(setLearnCardsId(pack._id, pack.name, pack.cardsCount))}
+                                            aria-label="learn"><LocalLibraryIcon color='info'/></IconButton>
+                            </Link>
                             {userId === pack.user_id && <span>
                             <IconButton aria-label="edit" onClick={() => updatePack(pack._id)}><EditIcon color='info'/></IconButton>
                             <span> </span>
@@ -66,6 +69,5 @@ export const PacksTableBody = ({callbackUpdate, callbackDelete}: PropsType) => {
                 ))}
             </TableBody>
         </>
-
     );
 }

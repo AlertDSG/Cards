@@ -5,7 +5,6 @@ import {InputTable} from "../../UniversalComponents/tableComponent/InputTable";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {changeParamsPacks} from "../../../features/packs/packs-reducer";
 import {ModalAddPack} from "../modals/packs/ModalAddPack";
-import {ModalEditCard} from "../modals/cards/ModalEditCard";
 
 export const PacksHeader = () => {
 

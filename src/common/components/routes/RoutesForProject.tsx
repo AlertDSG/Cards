@@ -8,6 +8,7 @@ import {Profile} from "../../../features/profile/Profile";
 import {Error404} from "../../Error-404";
 import {Packs} from "../../../features/packs/Packs";
 import {Cards} from "../../../features/cards/Cards";
+import {Learn} from "../../../features/learn/Learn";
 
 export const RoutesForProject = () => {
     return (
@@ -20,6 +21,7 @@ export const RoutesForProject = () => {
             <Route path={'profile'} element={<Profile/>}/>
             <Route path={'packs'} element={<Packs/>}/>
             <Route path={'cards'} element={<Cards/>}/>
+            <Route path={'learn'} element={<Learn/>}/>
             <Route path={'/*'} element={<Navigate to={'/404'}/>}/>
             <Route path={'/404'} element={<Error404/>}/>
         </Routes>

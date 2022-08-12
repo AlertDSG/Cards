@@ -50,7 +50,7 @@ export const ForgotPassword = () => {
                 <CheckEmail/>
                 :
                 <Wrapper>
-                    <FormControl>
+                    <FormControl style={{textAlign: 'center'}}>
                         <form onSubmit={formik.handleSubmit}>
                             <FormGroup style={{paddingBottom: '20px'}}>
                                 <TextField

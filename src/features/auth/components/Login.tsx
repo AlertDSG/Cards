@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField} from '@mui/material';
-import { useFormik } from 'formik';
+import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
-import { loginTC } from '../auth-reducer';
+import {loginTC} from '../auth-reducer';
 import {useAppDispatch, useAppSelector} from '../../../common/hooks/hooks';
 import {Wrapper} from "../../../common/UniversalComponents/Wrapper";
 
@@ -49,8 +49,9 @@ export const Login = () => {
         return <Navigate to='/packs'/>
     }
 
-    return <Wrapper>
-            <form onSubmit={formik.handleSubmit}>
+    return <>
+        <Wrapper>
+            <form onSubmit={formik.handleSubmit} style={{textAlign: 'center'}}>
                 <FormControl>
                     <FormLabel>
                         <p>Test account credentials:</p>
@@ -63,7 +64,8 @@ export const Login = () => {
                             margin='normal'
                             {...formik.getFieldProps('email')}
                         />
-                        {formik.touched.email && formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                        {formik.touched.email && formik.errors.email &&
+                            <div style={{color: 'red'}}>{formik.errors.email}</div>}
                         <TextField
                             type='password'
                             label='Password'
@@ -76,12 +78,16 @@ export const Login = () => {
                             label='Remember me'
                             control={<Checkbox {...formik.getFieldProps('rememberMe')}/>}
                         />
-                        <Link to={'/forgot'}><h2 style={{display:'flex', justifyContent:'end', marginBottom: '15px', opacity:'.7'}}>Forgot Password</h2></Link>
-                        <Button disabled={status === 'loading'} type={'submit'} variant={'contained'} color={'primary'}>Login</Button>
-                        <h2 style={{padding: '15px 0', opacity:'.7'}}>Do you have an account?</h2>
+                        <Link to={'/forgot'}><h2
+                            style={{display: 'flex', justifyContent: 'end', marginBottom: '15px', opacity: '.7'}}>Forgot
+                            Password</h2></Link>
+                        <Button disabled={status === 'loading'} type={'submit'} variant={'contained'}
+                                color={'primary'}>Login</Button>
+                        <h2 style={{padding: '15px 0', opacity: '.7'}}>Do you have an account?</h2>
                         <Link to={'/registration'} style={{color: 'blue'}}>Sign In</Link>
                     </FormGroup>
                 </FormControl>
             </form>
-    </Wrapper>
+        </Wrapper>
+    </>
 }

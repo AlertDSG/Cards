@@ -14,8 +14,8 @@ type PropsType = {
 
 export const RangeTable = ({minDistance, min, max, callback, width, newMin, newMax}: PropsType) => {
 
-     let minInitial = newMin ? newMin : min
-     let maxInitial = newMax ? newMax : max
+    let minInitial = newMin ? newMin : min
+    let maxInitial = newMax ? newMax : max
 
     const [value, setValue] = React.useState<number[]>([minInitial, maxInitial]);
 
@@ -35,7 +35,7 @@ export const RangeTable = ({minDistance, min, max, callback, width, newMin, newM
         }
 
     };
-    
+
     const onChangeCommittedHandler = (event: React.SyntheticEvent | Event, value: number | Array<number>) => {
         Array.isArray(value) && callback && callback(value)
     }
@@ -43,17 +43,33 @@ export const RangeTable = ({minDistance, min, max, callback, width, newMin, newM
     return (
         <div style={{maxWidth: '350px'}}>
             <h2 style={{margin: '30px 0'}}>Number of cards</h2>
-            <Box sx={{width}}>
-                <Slider
-                    value={value}
-                    onChange={handleChange}
-                    onChangeCommitted={onChangeCommittedHandler}
-                    valueLabelDisplay="auto"
-                    min={min}
-                    max={max}
-                    disableSwap
-                />
-            </Box>
+            <div style={{display: 'flex', gap: '20px', alignItems: 'center'}}>
+                <h2 style={{
+                    height: '30px',
+                    width: '30px',
+                    backgroundColor: '#1976d2',
+                    color: 'white',
+                    padding: '5px 0'
+                }}>{minInitial}</h2>
+                <Box sx={{width}}>
+                    <Slider
+                        value={value}
+                        onChange={handleChange}
+                        onChangeCommitted={onChangeCommittedHandler}
+                        valueLabelDisplay="auto"
+                        min={min}
+                        max={max}
+                        disableSwap
+                    />
+                </Box>
+                <h2 style={{
+                    height: '30px',
+                    width: '30px',
+                    backgroundColor: '#1976d2',
+                    color: 'white',
+                    padding: '5px 0'
+                }}>{maxInitial}</h2>
+            </div>
         </div>
 
     );

@@ -11,4 +11,4 @@ export enum sortPacks {
 
 export type SortType = 'incr' | 'decr'
 
-export type NameCellType = 'packName' | 'cards' | 'update' | 'created' | 'action'
+export type NameCellType = 'packName' | 'cards' | 'update' | 'created' | 'action'| 'updateCard'

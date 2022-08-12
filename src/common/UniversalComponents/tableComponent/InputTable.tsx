@@ -4,6 +4,8 @@ import {useDebounce} from "../../hooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {changeParamsPacks} from "../../../features/packs/packs-reducer";
 import {changeParamsCards} from "../../../features/cards/cards-reducer";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton/IconButton";
 
 type PageType = 'packs' | 'cards'
 
@@ -23,14 +25,26 @@ export const InputTable = ({page}: InputPropsType) => {
         setValue(e.target.value)
     }
 
-      useEffect(() => {
+    useEffect(() => {
         if (debounce && page === 'packs') {
             dispatch(changeParamsPacks({packName: value}))
-        } else if(debounce && page === 'cards'){
-            dispatch(changeParamsCards({cardsPack_id: id,cardQuestion: value}))
+        } else if (debounce && page === 'cards') {
+            dispatch(changeParamsCards({cardsPack_id: id, cardQuestion: value}))
         }
-      }, [debounce])
+    }, [debounce])
 
-    return<> <TextField value={value} fullWidth id="fullWidth" placeholder={'Search...'} onChange={onChangeHandler}/>{debounce}</>
+    return <> <TextField value={value} fullWidth id="fullWidth" placeholder={'Search...'} onChange={onChangeHandler}/>
+        <IconButton
+            onClick={() => {
+                if (page === 'packs') {
+                    dispatch(changeParamsPacks({packName: undefined}))
+                } else if (page === 'cards') {
+                    dispatch(changeParamsCards({cardsPack_id: id, cardQuestion: undefined}))
+                }
+            }}
+            title={'clean search'}>
+            <CloseIcon/>
+        </IconButton>
+    </>
 };
 

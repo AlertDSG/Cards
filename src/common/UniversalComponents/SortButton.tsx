@@ -13,24 +13,25 @@ type SortButtonType = {
 export const SortButton = ({nameHeaderCell}: SortButtonType) => {
 
     const dispatch = useAppDispatch()
-    const sortStatus = useAppSelector(state => state.packs.statusSort)
-    const regulator = useAppSelector(state => state.packs.regulator)
+    const sortStatus = useAppSelector(state => state.app.statusSort)
+    const regulator = useAppSelector(state => state.app.regulator)
+    const id = useAppSelector(state => state.cards.params.cardsPack_id)
 
-const initial = nameHeaderCell === sortStatus ? regulator : 'decr'
+    const initial = nameHeaderCell === sortStatus ? regulator : 'decr'
 
     const [sort, setSort] = useState<SortType>(initial)
 
     const onClickHandler = (value: SortType) => {
         setSort(value)
-        sortHelperUtils(value, nameHeaderCell, dispatch)
+        sortHelperUtils(value, nameHeaderCell, dispatch, id)
     }
 
     return (
         <>
             {sort === 'decr'
-               ?
+                ?
                 <IconButton aria-label="arrow-down" onClick={() => onClickHandler('incr')}>
-                <ArrowDropDownIcon color='info'/></IconButton>
+                    <ArrowDropDownIcon color='info'/></IconButton>
                 :
                 <IconButton aria-label="arrow-down" onClick={() => onClickHandler('decr')}>
                     <ArrowDropUpIcon color='info'/></IconButton>

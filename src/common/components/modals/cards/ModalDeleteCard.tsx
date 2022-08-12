@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import {Delete} from "@mui/icons-material";
 import {useAppDispatch} from "../../../hooks/hooks";
 import {removeCard} from "../../../../features/cards/cards-reducer";
+import style from "../Modals.module.css"
 
 
 type ModalType = {
@@ -18,28 +19,26 @@ type ModalType = {
 
 export const ModalDeleteCard = ({isOpen, id, callback}: ModalType) => {
 
-    // const [openModal, setOpenModal] = useState<boolean>(isOpen)
-
     const dispatch = useAppDispatch()
 
     const deleteCardHandler = () => {
         dispatch(removeCard(id))
     }
 
-
     return (
         <>
-
-            <WrapperModal isOpen={isOpen}>
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <WrapperModal isOpen={isOpen} callback={callback}>
+                <div className={style.header}>
                     <h2>Delete Card</h2>
                     <IconButton onClick={() => callback()}>
                         <CloseIcon/>
                     </IconButton>
                 </div>
-                <h3>Do you want to remove {}</h3>
-                <h3>All cards will be deleted</h3>
-                <Stack direction="row" spacing={2}>
+                <div className={style.text}>
+                    <h3>Do you want to remove <span>This Card</span></h3>
+                    <h3>All cards will be deleted</h3>
+                </div>
+                <Stack className={style.doubleBtn} direction="row" spacing={2}>
                     <Button onClick={() => callback()} variant="outlined">
                         Cancel
                     </Button>
@@ -47,7 +46,6 @@ export const ModalDeleteCard = ({isOpen, id, callback}: ModalType) => {
                         Delete
                     </Button>
                 </Stack>
-
             </WrapperModal>
         </>
     );
