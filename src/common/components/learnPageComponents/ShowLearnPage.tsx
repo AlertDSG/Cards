@@ -40,6 +40,7 @@ const ShowLearnPage = ({card, onNext}: ShowType) => {
     }
 
 
+
     return (
         <div>
             <h1 className={style.learn}>Learn "{packName}"</h1>
