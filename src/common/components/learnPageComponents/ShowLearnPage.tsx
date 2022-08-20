@@ -39,6 +39,7 @@ const ShowLearnPage = ({card, onNext}: ShowType) => {
         navigate('/packs')
     }
 
+
     return (
         <div>
             <h1 className={style.learn}>Learn "{packName}"</h1>
