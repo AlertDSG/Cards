@@ -51,7 +51,7 @@ const ShowLearnPage = ({card, onNext}: ShowType) => {
                     <ul className={style.list}>
                         {
                             data.map(d => <li key={d.id}>
-                                <input checked={d.id == grade} type="radio" name={'name'}
+                                <input checked={d.id === grade} type="radio" name={'name'}
                                        value={d.id}
                                        onChange={onSubmitHandler}/>
                                 <span>  {d.text}</span>
