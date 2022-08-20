@@ -26,7 +26,7 @@ export const PacksHeader = () => {
     }
 
     return (
-        <div style={{display: 'flex', gap: '40px', marginBottom: '25px', alignItems: "center"}}>
+        <div style={{display: 'flex', gap: '40px', marginBottom: '25px', alignItems: "end"}}>
             <ShowPacksButton paramsId={paramsUserId} callback={showPacksButtonHandler} userId={userId}/>
             <RangeTable
                 newMin={newMin}

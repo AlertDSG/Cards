@@ -19,7 +19,7 @@ export const ShowPacksButton = ({callback, userId, paramsId}: ShowPropsType) => 
 
     return (
         <div>
-            <h2 style={{margin: '30px 0'}}>Show packs cards</h2>
+            <h2 style={{margin: '30px 0', color: '#646464'}}>show items</h2>
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button color={filterPacks ===  userId ? "primary" :"inherit"} onClick={()=>onClickHandler(userId)}>My</Button>
                 <Button color={!filterPacks ? "primary" :"inherit"}  onClick={()=>onClickHandler(undefined)}>All</Button>

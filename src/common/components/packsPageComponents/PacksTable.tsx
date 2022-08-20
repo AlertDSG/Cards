@@ -13,21 +13,34 @@ import {ModalAddPack} from "../modals/packs/ModalAddPack";
 import {ModalUpdatePack} from "../modals/packs/ModalUpdatePack";
 import {ModalDeletePack} from "../modals/packs/ModalDeletePack";
 
-const nameColumn: Array<{ name: string, isDone: boolean, sortName: NameCellType }> = [
+export type nameColumnType = {
+    id: number,
+    name: string,
+    isDone: boolean,
+    sortName: NameCellType
+}
+
+/*const nameColumn: Array<nameColumnType> = [
     {name: 'Pack Name', isDone: true, sortName: 'packName'},
     {name: 'Cards', isDone: true, sortName: 'cards'},
     {name: 'Last Updated', isDone: true, sortName: 'update'},
     {name: 'Created by', isDone: true, sortName: 'created'},
     {name: 'Action', isDone: false, sortName: 'action'},
-]
+]*/
 
 export const PacksTable = () => {
 
     const [modalUpdate, setModalUpdate] = useState<boolean>(false)
     const [modalDelete, setModalDelete] = useState<boolean>(false)
+    const [nameColumn, setNameColumn] = useState<Array<nameColumnType>>([
+        {id: 1, name: 'Pack Name', isDone: false, sortName: 'packName'},
+        {id: 2, name: 'Cards', isDone: false, sortName: 'cards'},
+        {id: 3, name: 'Last Updated', isDone: false, sortName: 'update'},
+        {id: 4, name: 'Created by', isDone: false, sortName: 'created'},
+        {id: 5, name: 'Action', isDone: false, sortName: 'action'},
+    ])
 
     const dispatch = useAppDispatch()
-
     const packs = useAppSelector(state => state.packs.cardPacks)
     const defaultPage = useAppSelector(state => state.packs.page)
     const pageCount = useAppSelector(state => state.packs.pageCount)
@@ -46,6 +59,11 @@ export const PacksTable = () => {
     const pageSize = paramsPageCount ? paramsPageCount : pageCount
     const pageTotalCount = cardPacksTotalCount ? Math.ceil(cardPacksTotalCount / pageSize) : 0
 
+    const changeIsDoneToggle =  (columnName: string, isDone: boolean) => {
+        setNameColumn (nameColumn.map(c => c.name === columnName ? {...c, isDone} : {...c, isDone: false})
+        )
+    }
+
 
     console.log(pageTotalCount, cardPacksTotalCount, pageCount)
 
@@ -58,7 +76,7 @@ export const PacksTable = () => {
                 <div>
                     < TableContainer component={Paper}>
                         <Table sx={{minWidth: 650}} aria-label="simple table">
-                            <HeaderTable data={nameColumn}/>
+                            <HeaderTable data={nameColumn} changeIsDoneToggle={changeIsDoneToggle}/>
                             <PacksTableBody callbackUpdate={()=>setModalUpdate(true)} callbackDelete={()=>setModalDelete(true)}/>
                         </Table>
                     </TableContainer>

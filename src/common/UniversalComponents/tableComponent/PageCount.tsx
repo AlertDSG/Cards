@@ -1,6 +1,5 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect'
 
@@ -9,6 +8,7 @@ type PageCountPropsType = {
     pageCount: number
 }
 
+
 export const PageCount = ({callback, pageCount}: PageCountPropsType) => {
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -16,22 +16,25 @@ export const PageCount = ({callback, pageCount}: PageCountPropsType) => {
     }
 
     return (
-        <Box sx={{ maxWidth: 55 }}>
-            <FormControl fullWidth>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Show
-                </InputLabel>
-                <NativeSelect
-                    onChange={onChangeHandler}
-                    defaultValue={pageCount}
-                >
-                    <option value={4}>4</option>
-                    <option value={8}>8</option>
-                    <option value={16}>16</option>
-                    <option value={32}>32</option>
-                </NativeSelect>
-            </FormControl>
+        <Box sx={{width: 220}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                <div style={{color: '#646464'}}>show</div>
+                <div>
+                    <FormControl fullWidth>
+                        <NativeSelect
+                            onChange={onChangeHandler}
+                            defaultValue={pageCount}
+                        >
+                            <option value={4}>4</option>
+                            <option value={8}>8</option>
+                            <option value={16}>16</option>
+                            <option value={32}>32</option>
+                        </NativeSelect>
+                    </FormControl>
+                </div>
+                <div style={{color: '#646464'}}>packs per page</div>
+            </div>
         </Box>
-    );
-};
+    )
+}
 

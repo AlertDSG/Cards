@@ -7,27 +7,27 @@ export const Navlinks = () => {
         <nav style={{position: 'absolute', bottom: '0', left: '20px'}}>
             <ul className={s.body}>
                 <li><NavLink to='/login' className={navData => navData.isActive ? s.active : s.item}>
-                    Login
+                    Login_
                 </NavLink>
                 </li>
                 <li><NavLink to='/registration' className={navData => navData.isActive ? s.active : s.item}>
-                    Registration
+                    Registration_
                 </NavLink>
                 </li>
                 <li><NavLink to='/set-new-password' className={navData => navData.isActive ? s.active : s.item}>
-                    New Password
+                    New Password_
                 </NavLink>
                 </li>
                 <li><NavLink to='/forgot' className={navData => navData.isActive ? s.active : s.item}>
-                    Forgot Password
+                    Forgot Password_
                 </NavLink>
                 </li>
                 <li><NavLink to='/profile' className={navData => navData.isActive ? s.active : s.item}>
-                    Profile
+                    Profile_
                 </NavLink>
                 </li>
                 <li><NavLink to='/packs' className={navData => navData.isActive ? s.active : s.item}>
-                    Packs
+                    Packs_
                 </NavLink>
                 </li>
                 <li><NavLink to='/cards' className={navData => navData.isActive ? s.active : s.item}>

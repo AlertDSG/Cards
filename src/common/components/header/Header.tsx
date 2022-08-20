@@ -11,17 +11,17 @@ export const Header = () => {
 
         <div>
             <div className={style.header}>
-                <h1>IT-Developers</h1>
+                <h1 style={{color: 'white'}}>IT-Developers</h1>
                 <div >
                     {
                         isLoggedIn
                             ?
                             <Link to={'/packs' }>
-                                <span style={{paddingRight: '50px'}}>Packs list</span>
+                                <span style={{paddingRight: '50px', color: 'white'}}>Packs list</span>
                             </Link>
                             :
                             <Link to={'/login'}>
-                                <span style={{display:'inline-block', border:'1px solid', padding: '5px 10px'}}>Sign in</span>
+                                <span style={{display:'inline-block', border:'1px solid', padding: '5px 10px', color: 'white', borderRadius: 4}}>Sign in</span>
                             </Link>
                     }
                 </div>

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {HeaderTable} from "../../UniversalComponents/tableComponent/HeaderTable";
-import {NameCellType} from "../../TypeForSort";
 import {CardsTableBody} from "./CardsTableBody";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
@@ -11,21 +10,29 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {changeParamsCards} from "../../../features/cards/cards-reducer";
 import {ModalEditCard} from "../modals/cards/ModalEditCard";
 import {ModalDeleteCard} from "../modals/cards/ModalDeleteCard";
+import {nameColumnType} from '../packsPageComponents/PacksTable';
 
 
-const nameColumn: Array<{ name: string, isDone: boolean, sortName: NameCellType }> = [
+/*const nameColumn: Array<{ name: string, isDone: boolean, sortName: NameCellType }> = [
     {name: 'Question', isDone: false, sortName: 'updateCard'},
     {name: 'Answer', isDone: false, sortName: 'updateCard'},
     {name: 'Last Updated', isDone: true, sortName: 'updateCard'},
     {name: 'Grade', isDone: false, sortName: 'updateCard'},
     {name: 'Action', isDone: false, sortName: 'updateCard'},
-]
+]*/
 
 export const CardsTable = () => {
 
     const [updateId, setUpdateId] = useState<string>('')
     const [modalUpdate, setModalUpdate] = useState<boolean>(false)
     const [modalDelete, setModalDelete] = useState<boolean>(false)
+    const [nameColumn, setNameColumn] = useState<Array<nameColumnType>>([
+        {id: 1, name: 'Question', isDone: false, sortName: 'Question'},
+        {id: 2, name: 'Answer', isDone: false, sortName: 'Answer'},
+        {id: 3, name: 'Last Updated', isDone: true, sortName: 'updateCard'},
+        {id: 4, name: 'Grade', isDone: false, sortName: 'Grade'},
+        {id: 5, name: 'Action', isDone: false, sortName: 'Action'},
+    ])
 
     const dispatch = useAppDispatch()
 
@@ -34,7 +41,7 @@ export const CardsTable = () => {
     const cardsPack_id = useAppSelector(state => state.cards.params.cardsPack_id)
     const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
     const cards = useAppSelector((state) => state.cards.cards)
-    console.log(cards)
+
 
     const changePageNumberHandler = (page: number) => {
         dispatch(changeParamsCards({page, cardsPack_id}))
@@ -46,6 +53,11 @@ export const CardsTable = () => {
 
     const pageTotalCount = Math.ceil(cardsTotalCount / pageCount)
 
+    const changeIsDoneToggle =  (columnName: string, isDone: boolean) => {
+        console.log(isDone)
+        setNameColumn (nameColumn.map(c => c.name === columnName ? {...c, isDone} : {...c, isDone: false})
+        )
+    }
 
     return (
         <> {modalUpdate &&
@@ -57,7 +69,7 @@ export const CardsTable = () => {
                 ? < div style={{marginTop: '30px'}}>
                     < TableContainer component={Paper}>
                         <Table sx={{minWidth: 650}} aria-label="simple table">
-                            <HeaderTable data={nameColumn}/>
+                            <HeaderTable data={nameColumn} changeIsDoneToggle={changeIsDoneToggle} />
                             <CardsTableBody
                                 callbackDelete={(id) => {
                                     setUpdateId(id)

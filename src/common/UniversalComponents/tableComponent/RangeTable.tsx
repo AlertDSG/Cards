@@ -42,14 +42,15 @@ export const RangeTable = ({minDistance, min, max, callback, width, newMin, newM
 
     return (
         <div style={{maxWidth: '350px'}}>
-            <h2 style={{margin: '30px 0'}}>Number of cards</h2>
+            <h2 style={{margin: '30px 0', color: '#646464'}}>amount of cards</h2>
             <div style={{display: 'flex', gap: '20px', alignItems: 'center'}}>
                 <h2 style={{
                     height: '30px',
                     width: '30px',
-                    backgroundColor: '#1976d2',
-                    color: 'white',
-                    padding: '5px 0'
+                    backgroundColor: '#e0e0e0',
+                    color: 'black',
+                    padding: '5px 0',
+                    borderRadius: 3,
                 }}>{minInitial}</h2>
                 <Box sx={{width}}>
                     <Slider
@@ -65,9 +66,10 @@ export const RangeTable = ({minDistance, min, max, callback, width, newMin, newM
                 <h2 style={{
                     height: '30px',
                     width: '30px',
-                    backgroundColor: '#1976d2',
-                    color: 'white',
-                    padding: '5px 0'
+                    backgroundColor: '#e0e0e0',
+                    color: 'black',
+                    padding: '5px 0',
+                    borderRadius: 3,
                 }}>{maxInitial}</h2>
             </div>
         </div>

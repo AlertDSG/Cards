@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 type SortButtonType = {
-    nameHeaderCell: NameCellType
+    nameHeaderCell: NameCellType,
 }
 
 export const SortButton = ({nameHeaderCell}: SortButtonType) => {
@@ -33,7 +33,7 @@ export const SortButton = ({nameHeaderCell}: SortButtonType) => {
                 <IconButton aria-label="arrow-down" onClick={() => onClickHandler('incr')}>
                     <ArrowDropDownIcon color='info'/></IconButton>
                 :
-                <IconButton aria-label="arrow-down" onClick={() => onClickHandler('decr')}>
+                <IconButton  aria-label="arrow-down" onClick={() => onClickHandler('decr')}>
                     <ArrowDropUpIcon color='info'/></IconButton>
             }
         </>
