@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Cards/static/css/main.a89c2d5d.css",
-    "main.js": "/Cards/static/js/main.1a6e8c81.js",
+    "main.css": "/Cards/static/css/main.b2549832.css",
+    "main.js": "/Cards/static/js/main.a7bc7713.js",
     "static/js/787.64a3f69d.chunk.js": "/Cards/static/js/787.64a3f69d.chunk.js",
     "static/media/404-error-page-not-found.jpg": "/Cards/static/media/404-error-page-not-found.44f968b5b37b520269b3.jpg",
     "static/media/Male-Avatar.png": "/Cards/static/media/Male-Avatar.159d2a13ef7db7a99176.png",
     "index.html": "/Cards/index.html",
-    "main.a89c2d5d.css.map": "/Cards/static/css/main.a89c2d5d.css.map",
-    "main.1a6e8c81.js.map": "/Cards/static/js/main.1a6e8c81.js.map",
+    "main.b2549832.css.map": "/Cards/static/css/main.b2549832.css.map",
+    "main.a7bc7713.js.map": "/Cards/static/js/main.a7bc7713.js.map",
     "787.64a3f69d.chunk.js.map": "/Cards/static/js/787.64a3f69d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a89c2d5d.css",
-    "static/js/main.1a6e8c81.js"
+    "static/css/main.b2549832.css",
+    "static/js/main.a7bc7713.js"
   ]
 }
